@@ -8,14 +8,14 @@ const  Login=()=> {
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
-  const [username, setUsername] = useState("");
+  const [identifier, setIdentifier] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErr("");
     try {
-      await authService.sigin(username,password).then(() => {
+      await authService.sigin(identifier,password).then(() => {
         setLoading(false);
         setErr("hey");
         window.location.href = "/dashboard";
@@ -55,8 +55,8 @@ const  Login=()=> {
                       className="form-control form-control-lg"
                       id="exampleInputUsername1"
                       placeholder="Username"
-                      onChange={(e) => setUsername(e.target.value)}
-                      value={username}
+                      onChange={(e) => setIdentifier(e.target.value)}
+                      value={identifier}
                     />
                   </div>
                   <div className="form-group">

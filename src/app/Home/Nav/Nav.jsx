@@ -1,7 +1,7 @@
 import React from "react";
 import "../Nav/css/nav.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import authService from "../../services/auth/authService";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
@@ -9,6 +9,9 @@ const Nav = () => {
   const openNav = () => {
     setOpen(!open);
   };
+  const user = authService.user;
+  console.log(user);
+
   return (
     <>
       <div className="nav-container">
