@@ -1,0 +1,21 @@
+.post-job-title{
+    text-align: center;
+    margin-top: 50px;
+}
+.post-job-grid{
+ padding: 0px 100px;
+}
+.post-a-job-flex{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1rem;
+}
+.post-a-job-input input{
+    background: whitesmoke;
+    border: none;
+    outline: 1px solid lightgray;
+    padding: 5px;
+    width: 90%;
+    border-radius: 5px;
+
+}

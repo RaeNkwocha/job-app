@@ -1,0 +1,71 @@
+.get-started-grid{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 100px;
+    padding: 20px;
+
+}
+
+.get-started-grid img{
+    width: 100%;
+    height: 300px;
+}
+.first-grid{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;}
+.get-started-btn{
+    display: flex;
+    justify-content: center;
+}
+.job-description-holder{
+    display: grid;
+    place-items: center;
+    padding: 10px 20px;
+    text-align: center;
+}
+.get-started-btn button{
+    outline: none;
+    border: none;
+    padding: 13px;
+    /* width: 150px; */
+    margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 912px) {
+    .get-started-grid{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 100px;
+    
+    }
+    
+    .get-started-grid img{
+        width: 100%;
+        height: 300px;
+    }
+    .first-grid{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;        margin-top: 50px;
+    }
+    .get-started-btn{
+        display: flex;
+        justify-content: center;
+    }
+    .get-started-btn button{
+        outline: none;
+        border: none;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .job-description-holder{
+        display: grid;
+        width: 70%;
+        place-items: center;
+        padding: 10px 0px;
+        text-align: center;
+    }
+}

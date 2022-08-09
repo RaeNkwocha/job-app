@@ -1,0 +1,40 @@
+.employer-bg-img{
+    background: url("image/img.jpg");
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.employers-full-page-grid{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    background: black;
+    color: white;
+}
+.employer-bg-grid-two{
+   text-align: center;
+   padding: 50px;
+}
+@media only screen and (min-width: 912px) {
+    .employer-bg-img{
+        background: url("image/img.jpg");
+        height: 400px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .employers-full-page-grid{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        background: black;
+        color: white;
+    }
+    .employer-bg-grid-two{
+       text-align: center;
+       padding: 50px;
+    }
+}
