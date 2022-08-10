@@ -3,6 +3,7 @@ import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Nav from "../Home/Nav/Nav";
 import authService from "../services/auth/authService";
+import SizesExample from "./loginSpinner/Spinner";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -42,8 +43,11 @@ const Register = () => {
     } catch (error) {
       console.error("Error", error);
       setLoading(false);
-      setErr("email already taken");
-      console.log(err, "hey");
+      if (error.message === "Network Error") {
+        setErr("Network Error");
+      } else {
+        setErr("Invalid username or Password");
+      }
     }
   };
 
@@ -101,7 +105,7 @@ const Register = () => {
               <h6 className="font-weight-light">
                 Signing up is easy. It only takes a few steps
               </h6>
-              {loading ? <Spinner err={err} /> : ""}
+              {loading ? <SizesExample /> : null}{" "}
               {err ? <label style={{ color: "red" }}>{err}</label> : null}
               <form onSubmit={signUp} className="pt-3">
                 <div className="form-group">
@@ -112,7 +116,7 @@ const Register = () => {
                     placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>
@@ -124,7 +128,7 @@ const Register = () => {
                     placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>
@@ -136,7 +140,7 @@ const Register = () => {
                     placeholder="First name"
                     onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>
@@ -148,7 +152,7 @@ const Register = () => {
                     placeholder="Last name"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>
@@ -160,7 +164,7 @@ const Register = () => {
                     placeholder="Gender"
                     onChange={(e) => setGender(e.target.value)}
                     value={gender}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>
@@ -173,8 +177,7 @@ const Register = () => {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     value={phoneNumber}
                     required
-                    style={{color:"black"}}
-
+                    style={{ color: "black" }}
                   />
                 </div>
                 <div className="form-group">
@@ -213,7 +216,7 @@ const Register = () => {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    style={{color:"black"}}
+                    style={{ color: "black" }}
                     required
                   />
                 </div>

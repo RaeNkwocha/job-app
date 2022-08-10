@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Nav from "../Home/Nav/Nav";
 import authService from "../services/auth/authService";
+import SizesExample from "./loginSpinner/Spinner";
 
 const  Login=()=> {
   const [loading, setLoading] = useState(false);
@@ -23,8 +24,12 @@ const  Login=()=> {
     } catch (error) {
       console.error("Error", error);
       setLoading(false);
-      setErr("email already taken");
-      console.log(err, "hey");
+     if(error.message === "Network Error"){
+      setErr("Network Error");
+     } else{
+      setErr("Invalid username or Password");
+
+     }
     }
   };
     return (
@@ -48,6 +53,11 @@ const  Login=()=> {
                 </div>
                 <h4>Hello! let's get started</h4>
                 <h6 className="font-weight-light">Sign in to continue.</h6>
+                {loading?(
+                  <SizesExample/>
+                ):(
+                  null
+                )}
                 {err ? <label style={{ color: "red" }}>{err}</label> : null}
                 <form onSubmit={handleLogin} className="pt-3">
                 <div className="form-group">
