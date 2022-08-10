@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Nav/css/nav.css";
 import { useState } from "react";
 import authService from "../../services/auth/authService";
+import axios from "axios";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState([]);
+  const client = axios.create({
+    baseURL: "https://api.carelobby.flux.i.ng/v1/",
+  });
+
+  client.interceptors.request.use(
+    function (config) {
+      if (!config.headers) config.headers = {};
+      if (localStorage.getItem("jwt") != null) {
+        config.headers["Authorization"] =
+          "Bearer " + localStorage.getItem("jwt");
+      }
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
   const openNav = () => {
     setOpen(!open);
   };
   const user = authService.user;
   console.log(user);
+
+  // const userId = user.id;
+
+  // console.log(userId);
+
+  // useEffect(() => {
+  //   client.get(`users/${userId}?populate=*`).then((response) => {
+  //     setUserProfile(response.data);
+  //   });
+  // }, []);
+
+  console.log(userProfile);
 
   return (
     <>
@@ -21,7 +52,7 @@ const Nav = () => {
               <h1 style={{ zIndex: "200" }}>Logo</h1>
             </a>
             <ul className="nav-items">
-              <a
+             <a
                 style={{ textDecoration: "none", color: "black" }}
                 href="/user-pages/login"
               >

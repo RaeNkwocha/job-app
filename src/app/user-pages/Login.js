@@ -18,7 +18,7 @@ const  Login=()=> {
       await authService.sigin(identifier,password).then(() => {
         setLoading(false);
         setErr("hey");
-        window.location.href = "/dashboard";
+        window.location.href = "/user-pages/dashboard";
       });
     } catch (error) {
       console.error("Error", error);
@@ -48,6 +48,7 @@ const  Login=()=> {
                 </div>
                 <h4>Hello! let's get started</h4>
                 <h6 className="font-weight-light">Sign in to continue.</h6>
+                {err ? <label style={{ color: "red" }}>{err}</label> : null}
                 <form onSubmit={handleLogin} className="pt-3">
                 <div className="form-group">
                     <input
@@ -57,6 +58,8 @@ const  Login=()=> {
                       placeholder="Username"
                       onChange={(e) => setIdentifier(e.target.value)}
                       value={identifier}
+                      style={{color:"black"}}
+
                     />
                   </div>
                   <div className="form-group">
@@ -67,6 +70,8 @@ const  Login=()=> {
                       placeholder="Password"
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
+                      style={{color:"black"}}
+
                     />
                   </div>
                   <div className="mt-3">
