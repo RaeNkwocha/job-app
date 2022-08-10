@@ -11,32 +11,35 @@ const FormField = () => {
   const [jobDesc, setJobDesc] = useState("");
 
   const client = axios.create({
-    baseURL: "https://api.carelobby.flux.i.ng/v1/" 
+    baseURL: "https://api.carelobby.flux.i.ng/v1/",
   });
 
-  client.interceptors.request.use(function (config) {
-    if(!config.headers) config.headers={}
-    if (localStorage.getItem("jwt") != null) {
-    config.headers['Authorization']= "Bearer "+localStorage.getItem("jwt")
-
+  client.interceptors.request.use(
+    function (config) {
+      if (!config.headers) config.headers = {};
+      if (localStorage.getItem("jwt") != null) {
+        config.headers["Authorization"] =
+          "Bearer " + localStorage.getItem("jwt");
+      }
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
     }
-    return config;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+  );
   const addPost = (e) => {
     e.preventDefault();
     client
-    .post("jobs", {
-      data: {
-        title: title,
-        description: jobDesc,
-        requirements: jobReq,
-        type: type,
-        paymentCurrency: currency,
-        paymentAmount: payment,
-      },
-    })
+      .post("jobs", {
+        data: {
+          title: title,
+          description: jobDesc,
+          requirements: jobReq,
+          type: type,
+          paymentCurrency: currency,
+          paymentAmount: payment,
+        },
+      })
       .then((res) => console.log("posting job", res))
       .catch((err) => console.log(err));
   };

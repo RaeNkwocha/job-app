@@ -41,7 +41,7 @@ function ButtonDarkExample() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu variant="white">
-          <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
+          <Dropdown.Item href="user-pages/dashboard">Dashboard</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Notifications</Dropdown.Item>
           <Dropdown.Item href="#/action-3">Settings</Dropdown.Item>
           <Dropdown.Divider />
