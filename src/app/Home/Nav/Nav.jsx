@@ -31,15 +31,18 @@ const Nav = () => {
   const user = authService.user;
   console.log(user);
 
-  // const userId = user.id;
+  
 
-  // console.log(userId);
-
-  // useEffect(() => {
-  //   client.get(`users/${userId}?populate=*`).then((response) => {
-  //     setUserProfile(response.data);
-  //   });
-  // }, []);
+    
+  useEffect(() => {
+    if(user != null){
+      const userId = user.id;
+      client.get(`users/${userId}?populate=*`).then((response) => {
+        setUserProfile(response.data);
+      });
+    }
+  
+  }, []);
 
   console.log(userProfile);
 
@@ -52,18 +55,28 @@ const Nav = () => {
               <h1 style={{ zIndex: "200" }}>Logo</h1>
             </a>
             <ul className="nav-items">
-             <a
-                style={{ textDecoration: "none", color: "black" }}
-                href="/user-pages/login"
-              >
-                <li>Login</li>
-              </a>
-              <a
-                style={{ textDecoration: "none", color: "black" }}
-                href="/user-pages/register"
-              >
-                <li>Sign up</li>
-              </a>
+              {user ? (
+                <a style={{ textDecoration: "none", color: "black" }}>
+                  <li>{user.username}</li>
+                </a>
+              ) : (
+                <ul className="nav-items">
+                <a
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="/user-pages/login"
+                >
+                  <li>Login</li>
+                </a>
+                <a
+                  style={{ textDecoration: "none", color: "black" }}
+                  href="/user-pages/register"
+                >
+                  <li>Sign up</li>
+                </a>
+                </ul>
+              )}
+           
+
               <a
                 style={{ textDecoration: "none", color: "black" }}
                 href="/user-pages/post-a-job"
