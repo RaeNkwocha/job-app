@@ -49,7 +49,7 @@ const Register = () => {
 
   const nations = [
     {
-      id: 1,
+      id: 2,
       name: "Nigeria",
       value: "NGN",
     },
