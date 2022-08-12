@@ -8,6 +8,7 @@ const FormField = () => {
   const [payment, setPayment] = useState("");
   const [currency, setCurrency] = useState("");
   const [jobReq, setJobReq] = useState("");
+  const [error, setError] = useState("");
   const [jobDesc, setJobDesc] = useState("");
 
   const client = axios.create({
@@ -41,7 +42,22 @@ const FormField = () => {
         },
       })
       .then((res) => console.log("posting job", res))
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
+      if(error.message === "Request failed with status code 400"){
+        setError("Failed to post Job")
+      } else{
+        setError("Job Posted Succesfully")
+      }
+
+      setTitle("");
+      setType("");
+      setPayment("");
+      setCurrency("");
+      setJobDesc("");
+      setJobReq("")
+
+      console.log(error);
+
   };
   return (
     <>

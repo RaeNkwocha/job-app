@@ -36,12 +36,12 @@ const Nav = () => {
     if (user != null) {
       const userId = user.id;
       client.get(`users/${userId}?populate=*`).then((response) => {
-        setUserProfile(response.data);
+        setUserProfile(response.data.profile);
       });
     }
   }, []);
 
-  console.log(userProfile);
+  console.log(userProfile.type);
 
   return (
     <>
@@ -73,7 +73,7 @@ const Nav = () => {
             </ul>
             {user ? (
               <div style={{ zIndex: "200" }} className="hamburger">
-                <ButtonDarkExample />
+                <ButtonDarkExample userProfile={userProfile} />
               </div>
             ) : (
               <div style={{ zIndex: "200" }} className="hamburger">
@@ -128,7 +128,9 @@ const Nav = () => {
                 style={{ textDecoration: "none", color: "black" }}
                 href="/user-pages/post-a-job"
               >
-                <li>Post a job</li>
+                {userProfile.type === "Organiztion" ? (
+                  <li>Post a job</li>
+                ) : null}
               </a>
             </ul>
           </div>

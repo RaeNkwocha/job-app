@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Spinner from "../app/shared/Spinner";
+import SubmitJob from "./modal/SubmitJobApp";
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 
@@ -25,6 +26,7 @@ const Createaccount = lazy(() => import("./signupscreens/Createaccount"));
 const PostAjob = lazy(() => import("./post-a-job/PostAjob"));
 const Login = lazy(() => import("./user-pages/Login"));
 const Register = lazy(() => import("./user-pages/Register"));
+const SubmitJobApp = lazy(() => import("./modal/SubmitJobApp"));
 const Employers = lazy(() =>
   import("./signupscreens/employers-signup/Employers")
 );
@@ -41,6 +43,7 @@ class AppRoutes extends Component {
           <Route path="/user-pages/register" component={Register} />
           <Route path="/user-pages/post-a-job" component={PostAjob} />
           <Route path="/user-pages/dashboard" component={Dashboard} />
+          <Route path="/user-pages/apply-for-job" component={SubmitJobApp} />
 
           <Route path="/basic-ui/buttons" component={Buttons} />
           <Route path="/basic-ui/dropdowns" component={Dropdowns} />

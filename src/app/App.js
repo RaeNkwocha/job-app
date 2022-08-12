@@ -58,6 +58,7 @@ class App extends Component {
       "/user-pages/create-account",
       "/user-pages/employers-signup",
       "/user-pages/post-a-job",
+      "/user-pages/apply-for-job",
       "/user-pages/login",
       "/user-pages/register",
       "/user-pages/login-2",

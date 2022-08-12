@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import TransitionsModal from '../../modal/JobApplication'
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -33,16 +34,19 @@ const Jobs = () => {
                     </div>
                     <div className="preview-item-content d-sm-flex flex-grow">
                       <div className="flex-grow">
+                      <TransitionsModal job={job}>
                         <h6 className="preview-subject">
                           {job.attributes.title}
                         </h6>
+                        </TransitionsModal>
+
                         <p className="text-muted mb-0">
                           Type: {job.attributes.type}
                         </p>
                       </div>
                       <div className="mr-auto text-sm-right pt-2 pt-sm-0">
                         <p className="text-muted">{job.attributes.createdAt}</p>
-                        <p className="text-muted mb-0">30 tasks, 5 issues </p>
+                        <p className="text-muted mb-0" style={{color:'white'}}>Apply Now </p>
                       </div>
                     </div>
                   </div>

@@ -1,13 +1,47 @@
-import React, {component} from "react"
+import React, {component, useEffect, useState} from "react"
+import axios from "axios";
+
 import Dropdown from "react-bootstrap/Dropdown";
 import authService from "../../../services/auth/authService";
 
 function ButtonDarkExample() {
+  const [userProfile, setUserProfile] = useState([]);
+
   let user = authService.user;
   const logout = () => {
     authService.deleteAuthData();
     window.location.reload();
   };
+
+  const client = axios.create({
+    baseURL: "https://api.carelobby.flux.i.ng/v1/",
+  });
+
+  client.interceptors.request.use(
+    function (config) {
+      if (!config.headers) config.headers = {};
+      if (localStorage.getItem("jwt") != null) {
+        config.headers["Authorization"] =
+          "Bearer " + localStorage.getItem("jwt");
+      }
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
+
+  useEffect(() => {
+    if (user != null) {
+      const userId = user.id;
+      client.get(`users/${userId}?populate=*`).then((response) => {
+        setUserProfile(response.data.profile);
+      });
+    }
+  }, []);
+
+  console.log(userProfile.type);
   return (
     <>
       <Dropdown>
@@ -41,8 +75,10 @@ function ButtonDarkExample() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu variant="white">
-          <Dropdown.Item href="user-pages/dashboard">Dashboard</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Notifications</Dropdown.Item>
+          <Dropdown.Item href="/user-pages/dashboard">Dashboard</Dropdown.Item>
+          {userProfile.type === "Organization" ? (
+          <Dropdown.Item href="/user-pages/post-a-job">Post a Job</Dropdown.Item>
+          ) : null}
           <Dropdown.Item href="#/action-3">Settings</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={logout}>Log out</Dropdown.Item>

@@ -7,8 +7,11 @@
     "node": "14.18.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@lourenci/react-kanban": "^0.13.0",
     "@mdi/font": "^4.9.95",
+    "@mui/material": "^5.10.0",
     "@tinymce/tinymce-react": "^3.14.0",
     "axios": "^0.27.2",
     "bootstrap": "^4.6.2",
