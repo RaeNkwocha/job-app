@@ -28,6 +28,7 @@ const SubmitJobApp = () => {
                       type="text"
                       required
                       className="form-input"
+                      style={{width:"95%"}}
                     ></input>
                   </div>
                   <div>
@@ -40,6 +41,7 @@ const SubmitJobApp = () => {
                       //   onChange={(e) => setType(e.target.value)}
                       //   value={type}
                       className="form-input"
+                      style={{width:"95%"}}
                     ></input>
                   </div>
                 </div>
@@ -54,6 +56,7 @@ const SubmitJobApp = () => {
                       type="text"
                       required
                       className="form-input"
+                      style={{width:"95%"}}
                     ></input>
                   </div>
                   <div>
@@ -66,6 +69,7 @@ const SubmitJobApp = () => {
                       //   onChange={(e) => setType(e.target.value)}
                       //   value={type}
                       className="form-input"
+                      style={{width:"95%"}}
                     ></input>
                   </div>
                 </div>
@@ -80,6 +84,8 @@ const SubmitJobApp = () => {
                     // value={jobReq}
                     style={{marginBottom:'20px'}}
                     className="form-textarea"
+                    style={{width:"95%"}}
+
                     rows="6"
                   />
                 </div>

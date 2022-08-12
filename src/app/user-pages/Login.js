@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
 import Nav from "../Home/Nav/Nav";
 import authService from "../services/auth/authService";
 import SizesExample from "./loginSpinner/Spinner";
