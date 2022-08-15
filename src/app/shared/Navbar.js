@@ -6,6 +6,10 @@ import authService from "../services/auth/authService";
 
 const user = authService.user;
 
+if (user != null) {
+  const userName = user.username11;
+
+}
 class Navbar extends Component {
   toggleOffcanvas() {
     document.querySelector(".sidebar-offcanvas").classList.toggle("active");
@@ -311,7 +315,7 @@ class Navbar extends Component {
                     />
                   </svg>{" "}
                   <p className="mb-0 d-none d-sm-block navbar-profile-name">
-                    <Trans>{user.username}</Trans>
+                    {/* <Trans>{user.username}</Trans> */}
                   </p>
                   <i className="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>

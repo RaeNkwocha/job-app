@@ -88,7 +88,7 @@ class Sidebar extends Component {
                 </div>
                 <div className="profile-name">
                   <h5 className="mb-0 font-weight-normal">
-                    <Trans>{user.username}</Trans>
+                    {/* <Trans>{user.username}</Trans> */}
                   </h5>
                   <span>
                     <Trans>Gold Member</Trans>
