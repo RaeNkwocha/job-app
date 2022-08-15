@@ -1,11 +1,10 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route } from "react-router-dom";
-
+import { Switch, Route,Redirect } from "react-router-dom";
+import authService from "../app/services/auth/authService";
 import Spinner from "../app/shared/Spinner";
-import SubmitJob from "./modal/SubmitJobApp";
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
-
+const user = authService.user;
 const Buttons = lazy(() => import("./basic-ui/Buttons"));
 const Dropdowns = lazy(() => import("./basic-ui/Dropdowns"));
 const Typography = lazy(() => import("./basic-ui/Typography"));
@@ -39,8 +38,8 @@ class AppRoutes extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/user-pages/create-account" component={Createaccount} />
           <Route path="/user-pages/employers-signup" component={Employers} />
-          <Route path="/user-pages/login" component={Login} />
-          <Route path="/user-pages/register" component={Register} />
+          {!user && <Route path="/user-pages/login" component={Login} />}
+          {!user && <Route path="/user-pages/register" component={Register} />}
           <Route path="/user-pages/post-a-job" component={PostAjob} />
           <Route path="/user-pages/dashboard" component={Dashboard} />
           <Route path="/user-pages/apply-for-job" component={SubmitJobApp} />
@@ -62,6 +61,7 @@ class AppRoutes extends Component {
 
           <Route path="/error-pages/error-404" component={Error404} />
           <Route path="/error-pages/error-500" component={Error500} />
+          <Route path="/"><Redirect to="/"/></Route>
 
           {/* <Redirect to="/user-pages/login-1" /> */}
         </Switch>
