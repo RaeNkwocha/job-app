@@ -42,7 +42,24 @@ border: none;
 border-radius: 5px;
 background: whitesmoke;
 }
-
+@media only screen and (max-width: 500px) {
+    .form-input{
+        width: 280px;
+        padding: 8px;
+        outline: 1px solid lightgray;
+        border: none;
+        border-radius: 5px;
+        background: whitesmoke;
+        }
+        .form-textarea{
+        width: 280px;
+        padding: 8px;
+        outline: 1px solid lightgray;
+        border: none;
+        border-radius: 5px;
+        background: whitesmoke;
+        }
+}
 @media only screen and (min-width: 912px) {
     .employers-form-head{
         display: grid;
