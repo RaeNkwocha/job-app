@@ -6,7 +6,6 @@ import authService from "../services/auth/authService";
 
 const user = authService.user;
 
-
 class Navbar extends Component {
   toggleOffcanvas() {
     document.querySelector(".sidebar-offcanvas").classList.toggle("active");
@@ -46,72 +45,6 @@ class Navbar extends Component {
             </li>
           </ul>
           <ul className="navbar-nav navbar-nav-right">
-            <Dropdown alignRight as="li" className="nav-item d-none d-lg-block">
-              <Dropdown.Toggle className="nav-link btn btn-success create-new-button no-caret">
-                + <Trans>Create New Project</Trans>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="navbar-dropdown preview-list create-new-dropdown-menu">
-                <h6 className="p-3 mb-0">
-                  <Trans>Projects</Trans>
-                </h6>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-file-outline text-primary"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>Software Development</Trans>
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-web text-info"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>UI Development</Trans>
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-layers text-danger"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>Software Testing</Trans>
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <p className="p-3 mb-0 text-center">
-                  <Trans>See all projects</Trans>
-                </p>
-              </Dropdown.Menu>
-            </Dropdown>
             <li className="nav-item d-none d-lg-block">
               <a
                 className="nav-link"
@@ -312,11 +245,7 @@ class Navbar extends Component {
                     />
                   </svg>{" "}
                   <p className="mb-0 d-none d-sm-block navbar-profile-name">
-                   {user === null?(
-                      null
-                    ):(
-                      <Trans>{user.username}  </Trans>
-                    )}
+                    {user === null ? null : <Trans>{user.username} </Trans>}
                   </p>
                   <i className="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>

@@ -6,6 +6,7 @@ import Navbar from "./shared/Navbar";
 import Sidebar from "./shared/Sidebar";
 import Footer from "./shared/Footer";
 import { withTranslation } from "react-i18next";
+import { RecoilRoot } from "recoil";
 
 class App extends Component {
   state = {};
@@ -18,18 +19,20 @@ class App extends Component {
     let footerComponent = !this.state.isFullPageLayout ? <Footer /> : "";
     return (
       <>
-        <div className="container-scroller">
-          {sidebarComponent}
-          <div className="container-fluid page-body-wrapper">
-            {navbarComponent}
-            <div className="main-panel">
-              <div className="content-wrapper">
-                <AppRoutes />
+        <RecoilRoot>
+          <div className="container-scroller">
+            {sidebarComponent}
+            <div className="container-fluid page-body-wrapper">
+              {navbarComponent}
+              <div className="main-panel">
+                <div className="content-wrapper">
+                  <AppRoutes />
+                </div>
+                {footerComponent}
               </div>
-              {footerComponent}
             </div>
           </div>
-        </div>
+        </RecoilRoot>
       </>
     );
   }

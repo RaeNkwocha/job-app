@@ -56,7 +56,7 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <nav className="sidebar sidebar-offcanvas" id="sidebar">
+      <nav style={{background:"whitesmoke",color:"black", boxShadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px;"}} className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
           <a className="sidebar-brand brand-logo" href="index.html">
             <img src={require("../../assets/images/logo.svg")} alt="logo" />

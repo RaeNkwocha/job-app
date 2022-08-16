@@ -1,102 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../signupscreens/employers-signup/employers.css";
 import Nav from "../Home/Nav/Nav";
+import { useRecoilState } from "recoil";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { singleJobState } from "../atoms/atoms";
+import JobDetails from "./JobDetails";
+import SubmitJobForm from "./SubmitJobForm";
+import { apiProvider } from "../services/apiProvider";
+import { useParams } from "react-router";
+import authService from "../services/auth/authService";
 
 const SubmitJobApp = () => {
+  const params = useParams();
+  const [job, setJob] = useRecoilState(singleJobState);
+  const [hasApplied,setHasApplied]=useState(false)
+  useEffect(() => {
+    if (!job) {
+      apiProvider.get(`/jobs/${params.id}`).then((res)=>res.data.data).then(setJob);
+    }
+  apiProvider.get(`/job-applications/count?filters[job]=${params.id}&filters[user]=${authService.user.id}`).then((res)=>res.data!=0).then(setHasApplied);
+
+  }, []);
+  console.log(job,params);
+
+  if (!job) {
+    return <div>loading...</div>;
+  }
+  
+
   return (
     <>
-      <nav>
-        <Nav />
-      </nav>{" "}
-      <div style={{ background: "#191C24", color: "white",marginTop:'-30px' }}>
-
-        <div className="form-grid-holder">
-          <div className="main-form-grid">
-            <div>
-              <h4 style={{ marginBottom: "30px", marginTop:'50px' }}>Fill job Application</h4>
-            </div>
-            <form>
-              <div className="form-field">
-                <div className="form-grid">
-                  <div>
-                    <label style={{ display: "block", color: "lightGrey" }}>
-                      Name
-                    </label>
-                    <input
-                      //   onChange={(e) => setTitle(e.target.value)}
-                      //   value={title}
-                      type="text"
-                      required
-                      className="form-input"
-                    ></input>
-                  </div>
-                  <div>
-                    <label style={{ display: "block", color: "lightGrey" }}>
-                      Phone Number
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      //   onChange={(e) => setType(e.target.value)}
-                      //   value={type}
-                      className="form-input"
-                    ></input>
-                  </div>
-                </div>
-                <div className="form-grid">
-                  <div>
-                    <label style={{ display: "block", color: "lightGrey" }}>
-                      Start
-                    </label>
-                    <input
-                      //   onChange={(e) => setTitle(e.target.value)}
-                      //   value={title}
-                      type="text"
-                      required
-                      className="form-input"
-                    ></input>
-                  </div>
-                  <div>
-                    <label style={{ display: "block", color: "lightGrey" }}>
-                      End
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      //   onChange={(e) => setType(e.target.value)}
-                      //   value={type}
-                      className="form-input"
-                    ></input>
-                  </div>
-                </div>
-                <div>
-                  <label style={{ display: "block", color: "lightGrey" }}>
-                    Cover Letter
-                  </label>
-                  <textarea
-                    placeholder="Cover letter"
-                    type="text"
-                    // onChange={(e) => setJobReq(e.target.value)}
-                    // value={jobReq}
-                    style={{marginBottom:'20px'}}
-                    className="form-textarea"
-                    rows="6"
-                  />
-                </div>
-                <div>
-                  <label style={{ display: "block", color: "lightGrey" }}>
-                    Upload CV
-                  </label>
-                 <input type='file' />
-                </div>
-              </div>
-              <div style={{ marginTop: "20px" }}>
-                {" "}
-                <input type="submit" value="Submit Application" />
-              </div>
-            </form>
-          </div>
-        </div>
+      
+      <div style={{ background: "white", color: "black", marginTop: "30px" }}>
+        <Container>
+          <Row>
+            <Col sm={8}>
+              <JobDetails job={job} />
+            </Col>
+            <Col sm={4}>
+              <SubmitJobForm hasApplied={hasApplied} job={job} />
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

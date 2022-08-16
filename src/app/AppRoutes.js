@@ -42,7 +42,7 @@ class AppRoutes extends Component {
           {!user && <Route path="/user-pages/register" component={Register} />}
           <Route path="/user-pages/post-a-job" component={PostAjob} />
           <Route path="/user-pages/dashboard" component={Dashboard} />
-          <Route path="/user-pages/apply-for-job" component={SubmitJobApp} />
+          <Route path="/user-pages/:id/apply-for-job" component={SubmitJobApp} />
 
           <Route path="/basic-ui/buttons" component={Buttons} />
           <Route path="/basic-ui/dropdowns" component={Dropdowns} />
