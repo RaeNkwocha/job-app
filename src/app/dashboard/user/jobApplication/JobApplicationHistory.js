@@ -1,204 +1,117 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { apiProvider } from "../../../services/apiProvider";
+import authService from "../../../services/auth/authService";
 
 const JobApplicationHistory = () => {
+  const [jobApplication, setJobApplication] = useState([]);
+  const [userProfile, setUserProfile] = useState([]);
+
+  const user = authService.user;
+  console.log(user);
+
+  useEffect(() => {
+    if (user != null) {
+      const userId = user.id;
+      apiProvider.get(`users/${userId}?populate=*`).then((response) => {
+        setUserProfile(response.data.profile);
+      });
+    }
+    apiProvider
+      .get(`job-applications/?filters[user]=${user.id}&populate=*`)
+      .then((response) => {
+        setJobApplication(response.data.data);
+      });
+  }, []);
+
+  console.log(userProfile);
+  console.log(jobApplication);
   return (
     <div className="row ">
-    <div className="col-12 grid-margin">
-      <div className="card">
-        <div className="card-body">
-          <h4 className="card-title">Order Status</h4>
-          <div className="table-responsive">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </th>
-                  <th> Client Name </th>
-                  <th> Order No </th>
-                  <th> Product Cost </th>
-                  <th> Project </th>
-                  <th> Payment Mode </th>
-                  <th> Start Date </th>
-                  <th> Payment Status </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex">
-                      <img
-                        src={require("../../assets/images/faces/face1.jpg")}
-                        alt="face"
-                      />
-                      <span className="pl-2">Henry Klein</span>
-                    </div>
-                  </td>
-                  <td> 02312 </td>
-                  <td> $14,500 </td>
-                  <td> Dashboard </td>
-                  <td> Credit card </td>
-                  <td> 04 Dec 2019 </td>
-                  <td>
-                    <div className="badge badge-outline-success">
-                      Approved
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex">
-                      <img
-                        src={require("../../assets/images/faces/face2.jpg")}
-                        alt="face"
-                      />
-                      <span className="pl-2">Estella Bryan</span>
-                    </div>
-                  </td>
-                  <td> 02312 </td>
-                  <td> $14,500 </td>
-                  <td> Website </td>
-                  <td> Cash on delivered </td>
-                  <td> 04 Dec 2019 </td>
-                  <td>
-                    <div className="badge badge-outline-warning">
-                      Pending
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex">
-                      <img
-                        src={require("../../assets/images/faces/face5.jpg")}
-                        alt="face"
-                      />
-                      <span className="pl-2">Lucy Abbott</span>
-                    </div>
-                  </td>
-                  <td> 02312 </td>
-                  <td> $14,500 </td>
-                  <td> App design </td>
-                  <td> Credit card </td>
-                  <td> 04 Dec 2019 </td>
-                  <td>
-                    <div className="badge badge-outline-danger">
-                      Rejected
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex">
-                      <img
-                        src={require("../../assets/images/faces/face3.jpg")}
-                        alt="face"
-                      />
-                      <span className="pl-2">Peter Gill</span>
-                    </div>
-                  </td>
-                  <td> 02312 </td>
-                  <td> $14,500 </td>
-                  <td> Development </td>
-                  <td> Online Payment </td>
-                  <td> 04 Dec 2019 </td>
-                  <td>
-                    <div className="badge badge-outline-success">
-                      Approved
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="form-check form-check-muted m-0">
-                      <label className="form-check-label">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                        />
-                        <i className="input-helper"></i>
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="d-flex">
-                      <img
-                        src={require("../../assets/images/faces/face4.jpg")}
-                        alt="face"
-                      />
-                      <span className="pl-2">Sallie Reyes</span>
-                    </div>
-                  </td>
-                  <td> 02312 </td>
-                  <td> $14,500 </td>
-                  <td> Website </td>
-                  <td> Credit card </td>
-                  <td> 04 Dec 2019 </td>
-                  <td>
-                    <div className="badge badge-outline-success">
-                      Approved
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <div className="col-12 grid-margin">
+        <div className="card" style={{ background: "white", color: "black" }}>
+          <div className="card-body">
+            <h4 className="card-title">Order Status</h4>
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>
+                      <div className="form-check form-check-muted m-0">
+                        <label className="form-check-label">
+                          <input type="checkbox" className="form-check-input" />
+                          <i className="input-helper"></i>
+                        </label>
+                      </div>
+                    </th>
+                    <th> Job ID </th>
+                    <th> Title </th>
+                    <th> Payment </th>
+                    <th> Type </th>
+                    <th> Start Date </th>
+                    <th> End Date </th>
+                    <th> Job Status </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {jobApplication.map((application) => (
+                    <tr>
+                      <td>
+                        <div className="form-check form-check-muted m-0">
+                          <label className="form-check-label">
+                            <input
+                              type="checkbox"
+                              className="form-check-input"
+                            />
+                            <i className="input-helper"></i>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="d-flex">
+                          {/* <img
+                                 src={require("../../assets/images/faces/face1.jpg")}
+                                 alt="face"
+                               /> */}
+                          <span className="pl-2">{application.id}</span>
+                        </div>
+                      </td>
+                      <td>
+                        {" "}
+                        {application.attributes.job.data.attributes.title}{" "}
+                      </td>
+                      <td>
+                        {" "}
+                        {
+                          application.attributes.job.data.attributes
+                            .paymentAmount
+                        }{" "}
+                      </td>
+                      <td>
+                        {" "}
+                        {application.attributes.job.data.attributes.type}{" "}
+                      </td>
+                      <td>
+                        {" "}
+                        {
+                          application.attributes.job.data.attributes
+                            .start
+                        }{" "}
+                      </td>
+                      <td> {application.attributes.job.data.attributes.end} </td>
+                      <td>
+                        <div className="badge badge-outline-success">
+                        {application.attributes.job.data.attributes.status}                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>  )
-}
+  );
+};
 
-export default JobApplicationHistory
+export default JobApplicationHistory;

@@ -15,24 +15,29 @@ import authService from "../services/auth/authService";
 const SubmitJobApp = () => {
   const params = useParams();
   const [job, setJob] = useRecoilState(singleJobState);
-  const [hasApplied,setHasApplied]=useState(false)
+  const [hasApplied, setHasApplied] = useState(false);
   useEffect(() => {
     if (!job) {
-      apiProvider.get(`/jobs/${params.id}`).then((res)=>res.data.data).then(setJob);
+      apiProvider
+        .get(`/jobs/${params.id}`)
+        .then((res) => res.data.data)
+        .then(setJob);
     }
-  apiProvider.get(`/job-applications/count?filters[job]=${params.id}&filters[user]=${authService.user.id}`).then((res)=>res.data!=0).then(setHasApplied);
-
+    apiProvider
+      .get(
+        `/job-applications/count?filters[job]=${params.id}&filters[user]=${authService.user.id}`
+      )
+      .then((res) => res.data != 0)
+      .then(setHasApplied);
   }, []);
-  console.log(job,params);
+  console.log(job, params);
 
   if (!job) {
     return <div>loading...</div>;
   }
-  
 
   return (
     <>
-      
       <div style={{ background: "white", color: "black", marginTop: "30px" }}>
         <Container>
           <Row>
