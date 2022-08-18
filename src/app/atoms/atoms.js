@@ -8,5 +8,9 @@ export const singleJobState = atom({
   key: "singleJob",
   default: null,
 });
+export const singleApplicantState = atom({
+  key: "singleApplicants",
+  default: null,
+});
 
 export default jobState;

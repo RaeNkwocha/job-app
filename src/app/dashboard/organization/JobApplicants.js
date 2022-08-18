@@ -1,95 +1,173 @@
-import React, { Component, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useRecoilState } from "recoil";
+import jobState, {
+  singleApplicantState,
+  singleJobState,
+} from "../../atoms/atoms";
+import { apiProvider } from "../../services/apiProvider";
+import authService from "../../services/auth/authService";
+import CreatedJobs from "./CreatedJobs";
+import { useHistory } from "react-router-dom";
 
 const JobApplicants = () => {
-    const [jobApplicants, setJobApplicants] = useState([])
-    const [job,setJob]=useState(["job"])
-    const client = axios.create({
-        baseURL: "https://api.carelobby.flux.i.ng/v1/",
+  let navigate = useHistory();
+
+  const params = useParams();
+  const [hasApplied, setHasApplied] = useState([]);
+  const [status, setStatus] = useState("");
+  const [applicants, setApplicants] = useRecoilState(singleApplicantState);
+
+  useEffect(() => {
+    if (!applicants) {
+      apiProvider
+        .get(`/jobs/${params.id}`)
+        .then((res) => res.data.data)
+        .then(setApplicants);
+    }
+    apiProvider
+      .get(
+        `/job-applications/?filters[user]=${authService.user.id}&filters[job]=${params.id}&populate=*,user.profile`
+      )
+      .then((response) => {
+        setHasApplied(
+          response.data.data.filter((item) => item.attributes.user.data)
+        );
       });
-    //   header
-    client.interceptors.request.use(
-        function (config) {
-          if (!config.headers) config.headers = {};
-          if (localStorage.getItem("jwt") != null) {
-            config.headers["Authorization"] =
-              "Bearer " + localStorage.getItem("jwt");
-          }
-          return config;
-        },
-        function (error) {
-          return Promise.reject(error);
-        }
-      );
-    // 
-      useEffect(() => {
-        client.get(`job-applications?filters[job]=2&populate=*`).then((response) => {
-          setJobApplicants(response.data);
-        });
-      }, []);
-      console.log(jobApplicants);
+  }, []);
+
+  function changeJobStatus(id) {
+    apiProvider.put(`/job-applications/${id}`, {
+      data: {
+        status: status.value,
+      },
+    });
+
+    console.log(id, "hey");
+  }
+
+  const jboStatus = [
+    {
+      id: 0,
+      name: "Pending",
+      value: "Pending",
+    },
+    {
+      id: 1,
+      name: "Accepted",
+      value: "Accepted",
+    },
+    {
+      id: 2,
+      name: "Rejected",
+      value: "Rejected",
+    },
+    {
+      id: 3,
+      name: "InReview",
+      value: "InReview",
+    },
+  ];
+  console.log(status.value, "hey");
+
   return (
-      <></>
-    // <div className="col-md-8 grid-margin stretch-card">
-    //   <div style={{ background: "white", color: "black" }} className="card">
-    //     <div className="card-body">
-    //       <div className="d-flex flex-row justify-content-between">
-    //         <h4 className="card-title mb-1">Avaliable Jobs</h4>
-    //         <p className="text-muted mb-1">Posted at</p>
-    //       </div>
-    //       <div className="row">
-    //         <div className="col-12">
-    //           {jobs.slice(0, 5).map((job) => (
-    //             <div className="preview-list">
-    //               <div className="preview-item border-bottom">
-    //                 <div className="preview-thumbnail">
-    //                   <div className="preview-icon bg-primary">
-    //                     <i className="mdi mdi-file-document"></i>
-    //                   </div>
-    //                 </div>
-
-    //                 <div
-    //                   onClick={() => handleSubmit(job)}
-    //                   style={{ cursor: "pointer" }}
-    //                   className="preview-item-content d-sm-flex flex-grow"
-    //                 >
-    //                   <div className="flex-grow">
-    //                     <h6 className="preview-subject">
-    //                       {job.attributes.title}
-    //                     </h6>
-
-    //                     <p className="text-muted mb-0">
-    //                       Type: {job.attributes.type}
-    //                     </p>
-    //                   </div>
-    //                   <div className="mr-auto text-sm-right pt-2 pt-sm-0">
-    //                     <p className="text-muted">{job.attributes.createdAt}</p>
-    //                     <p
-    //                       className="text-muted mb-0"
-    //                       style={{ color: "white" }}
-    //                     >
-    //                       Apply Now{" "}
-    //                     </p>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           ))}
-    //           <div
-    //             style={{
-    //               display: "grid",
-    //               placeItems: "center",
-    //               marginTop: "20px",
-    //             }}
-    //           >
-    //             {" "}
-    //             <button>See more job openings</button>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    <>
+      <div className="row ">
+        <div className="col-12 grid-margin">
+          <div className="card" style={{ background: "white", color: "black" }}>
+            <div className="card-body">
+              <h4 className="card-title">Order Status</h4>
+              <div className="table-responsive">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <div className="form-check form-check-muted m-0">
+                          <label className="form-check-label">
+                            <input
+                              type="checkbox"
+                              className="form-check-input"
+                            />
+                            <i className="input-helper"></i>
+                          </label>
+                        </div>
+                      </th>
+                      <th> Job ID </th>
+                      <th> Applicants first name </th>
+                      <th> Phone Number </th>
+                      <th> Gender </th>
+                      <th> Country </th>
+                      <th> Email </th>
+                      <th> Application Status </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {hasApplied.map((item) => (
+                      <tr>
+                        <td>
+                          <div className="form-check form-check-muted m-0">
+                            <label className="form-check-label">
+                              <input
+                                type="checkbox"
+                                className="form-check-input"
+                              />
+                              <i className="input-helper"></i>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="d-flex">
+                            <span className="pl-2">{item.id}</span>
+                          </div>
+                        </td>
+                        <td>
+                          {" "}
+                          {
+                            item.attributes.user.data.attributes.profile.data
+                              .attributes.firstName
+                          }{" "}
+                        </td>
+                        <td>
+                          {
+                            item.attributes.user.data.attributes.profile.data
+                              .attributes.phoneNumber
+                          }
+                        </td>
+                        <td>
+                          {
+                            item.attributes.user.data.attributes.profile.data
+                              .attributes.gender
+                          }
+                        </td>
+                        <td>{item.attributes.user.data.attributes.country}</td>
+                        <td> {item.attributes.user.data.attributes.email} </td>
+                        <td>
+                          <div style={{ cursor: "pointer" }}>
+                            <select
+                              className="badge badge-outline"
+                              onChange={() => changeJobStatus(item.id)}
+                            >
+                              {jboStatus.map((status) => (
+                                <option
+                                  onChange={(e) => setStatus(e.target.value)}
+                                  value={status.value}
+                                >
+                                  {item.attributes.status}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

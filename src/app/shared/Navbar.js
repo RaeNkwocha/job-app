@@ -16,7 +16,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar p-0 fixed-top d-flex flex-row">
+      <nav
+        style={{ background: "white" }}
+        className="navbar p-0 fixed-top d-flex flex-row"
+      >
         <div className="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
           <Link className="navbar-brand brand-logo-mini" to="/">
             <img
@@ -38,6 +41,7 @@ class Navbar extends Component {
               <form className="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
                 <input
                   type="text"
+                  style={{ background: "white" }}
                   className="form-control"
                   placeholder="Search products"
                 />
@@ -54,176 +58,7 @@ class Navbar extends Component {
                 <i className="mdi mdi-view-grid"></i>
               </a>
             </li>
-            <Dropdown alignRight as="li" className="nav-item border-left">
-              <Dropdown.Toggle
-                as="a"
-                className="nav-link count-indicator cursor-pointer"
-              >
-                <i className="mdi mdi-email"></i>
-                <span className="count bg-success"></span>
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="navbar-dropdown preview-list">
-                <h6 className="p-3 mb-0">
-                  <Trans>Messages</Trans>
-                </h6>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <img
-                        src={require("../../assets/images/faces/face4.jpg")}
-                        alt="profile"
-                        className="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>Mark send you a message</Trans>
-                    </p>
-                    <p className="text-muted mb-0">
-                      {" "}
-                      1 <Trans>Minutes ago</Trans>{" "}
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <img
-                        src={require("../../assets/images/faces/face2.jpg")}
-                        alt="profile"
-                        className="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>Cregh send you a message</Trans>
-                    </p>
-                    <p className="text-muted mb-0">
-                      {" "}
-                      15 <Trans>Minutes ago</Trans>{" "}
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  href="!#"
-                  onClick={(evt) => evt.preventDefault()}
-                  className="preview-item"
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <img
-                        src={require("../../assets/images/faces/face3.jpg")}
-                        alt="profile"
-                        className="rounded-circle profile-pic"
-                      />
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject ellipsis mb-1">
-                      <Trans>Profile picture updated</Trans>
-                    </p>
-                    <p className="text-muted mb-0">
-                      {" "}
-                      18 <Trans>Minutes ago</Trans>{" "}
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <p className="p-3 mb-0 text-center">
-                  4 <Trans>new messages</Trans>
-                </p>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown alignRight as="li" className="nav-item border-left">
-              <Dropdown.Toggle
-                as="a"
-                className="nav-link count-indicator cursor-pointer"
-              >
-                <i className="mdi mdi-bell"></i>
-                <span className="count bg-danger"></span>
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="dropdown-menu navbar-dropdown preview-list">
-                <h6 className="p-3 mb-0">
-                  <Trans>Notifications</Trans>
-                </h6>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  className="dropdown-item preview-item"
-                  onClick={(evt) => evt.preventDefault()}
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-calendar text-success"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <p className="preview-subject mb-1">
-                      <Trans>Event today</Trans>
-                    </p>
-                    <p className="text-muted ellipsis mb-0">
-                      <Trans>
-                        Just a reminder that you have an event today
-                      </Trans>
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  className="dropdown-item preview-item"
-                  onClick={(evt) => evt.preventDefault()}
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-settings text-danger"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <h6 className="preview-subject mb-1">
-                      <Trans>Settings</Trans>
-                    </h6>
-                    <p className="text-muted ellipsis mb-0">
-                      <Trans>Update dashboard</Trans>
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  className="dropdown-item preview-item"
-                  onClick={(evt) => evt.preventDefault()}
-                >
-                  <div className="preview-thumbnail">
-                    <div className="preview-icon bg-dark rounded-circle">
-                      <i className="mdi mdi-link-variant text-warning"></i>
-                    </div>
-                  </div>
-                  <div className="preview-item-content">
-                    <h6 className="preview-subject mb-1">
-                      <Trans>Launch Admin</Trans>
-                    </h6>
-                    <p className="text-muted ellipsis mb-0">
-                      <Trans>New admin wow</Trans>!
-                    </p>
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <p className="p-3 mb-0 text-center">
-                  <Trans>See all notifications</Trans>
-                </p>
-              </Dropdown.Menu>
-            </Dropdown>
+
             <Dropdown alignRight as="li" className="nav-item">
               <Dropdown.Toggle
                 as="a"
@@ -234,7 +69,7 @@ class Navbar extends Component {
                     xmlns="http://www.w3.org/2000/svg"
                     width="26"
                     height="26"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-person-circle"
                     viewBox="0 0 16 16"
                   >
@@ -244,7 +79,10 @@ class Navbar extends Component {
                       d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                     />
                   </svg>{" "}
-                  <p className="mb-0 d-none d-sm-block navbar-profile-name">
+                  <p
+                    style={{ color: "black" }}
+                    className="mb-0 d-none d-sm-block navbar-profile-name"
+                  >
                     {user === null ? null : <Trans>{user.username} </Trans>}
                   </p>
                   <i className="mdi mdi-menu-down d-none d-sm-block"></i>

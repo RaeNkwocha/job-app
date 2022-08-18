@@ -19,7 +19,9 @@ const JobApplicationHistory = () => {
     apiProvider
       .get(`job-applications/?filters[user]=${user.id}&populate=*`)
       .then((response) => {
-        setJobApplication(response.data.data);
+        setJobApplication(
+          response.data.data.filter((item) => item.attributes.job.data)
+        );
       });
   }, []);
 
@@ -53,9 +55,9 @@ const JobApplicationHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {jobApplication.map((application) => (
+                  {jobApplication.map((item) => (
                     <tr>
-                      <td>
+                      <td key={item.id}>
                         <div className="form-check form-check-muted m-0">
                           <label className="form-check-label">
                             <input
@@ -68,39 +70,23 @@ const JobApplicationHistory = () => {
                       </td>
                       <td>
                         <div className="d-flex">
-                          {/* <img
-                                 src={require("../../assets/images/faces/face1.jpg")}
-                                 alt="face"
-                               /> */}
-                          <span className="pl-2">{application.id}</span>
+                          <span className="pl-2">{item.id}</span>
                         </div>
                       </td>
+                      <td> {item.attributes.job.data.attributes.title} </td>
+
                       <td>
                         {" "}
-                        {application.attributes.job.data.attributes.title}{" "}
+                        {item.attributes.job.data.attributes.paymentAmount}{" "}
                       </td>
+                      <td> {item.attributes.job.data.attributes.type} </td>
+
+                      <td> {item.attributes.job.data.attributes.start} </td>
+                      <td> {item.attributes.job.data.attributes.end} </td>
                       <td>
-                        {" "}
-                        {
-                          application.attributes.job.data.attributes
-                            .paymentAmount
-                        }{" "}
-                      </td>
-                      <td>
-                        {" "}
-                        {application.attributes.job.data.attributes.type}{" "}
-                      </td>
-                      <td>
-                        {" "}
-                        {
-                          application.attributes.job.data.attributes
-                            .start
-                        }{" "}
-                      </td>
-                      <td> {application.attributes.job.data.attributes.end} </td>
-                      <td>
-                        <div className="badge badge-outline-success">
-                        {application.attributes.job.data.attributes.status}                        </div>
+                        <div className={item.attributes.status === "Accepted" ?('badge badge-outline-success') :null}>
+                          {item.attributes.status}
+                        </div>
                       </td>
                     </tr>
                   ))}

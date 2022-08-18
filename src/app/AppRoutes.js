@@ -27,6 +27,7 @@ const Login = lazy(() => import("./user-pages/Login"));
 const Register = lazy(() => import("./user-pages/Register"));
 const JobApplicationHistory = lazy(() => import("./dashboard/user/jobApplication/JobApplicationHistory"));
 const SubmitJobApp = lazy(() => import("./modal/SubmitJobApp"));
+const JobApplicants = lazy(() => import("./dashboard/organization/JobApplicants"));
 const Employers = lazy(() =>
   import("./signupscreens/employers-signup/Employers")
 );
@@ -45,6 +46,7 @@ class AppRoutes extends Component {
           <Route path="/user-pages/job-applications" component={JobApplicationHistory} />
           <Route path="/user-pages/dashboard" component={Dashboard} />
           <Route path="/user-pages/:id/apply-for-job" component={SubmitJobApp} />
+          <Route path="/user-pages/:id/job-applicants" component={JobApplicants} />
 
           <Route path="/basic-ui/buttons" component={Buttons} />
           <Route path="/basic-ui/dropdowns" component={Dropdowns} />

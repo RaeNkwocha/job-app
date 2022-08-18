@@ -37,7 +37,7 @@ const FormField = () => {
           description: jobDesc,
           requirements: jobReq,
           type: type,
-          paymentCurrency: currency,
+          paymentCurrency: "GPB",
           paymentAmount: payment,
         },
       })
